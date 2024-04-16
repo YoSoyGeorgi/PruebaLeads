@@ -545,7 +545,7 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     boton_frame = tk.Frame(ventana_datos)
     boton_frame.grid(row=1, column=0, columnspan=2, pady=10)
 
-    tk.Button(boton_frame, text="Abrir Página web", command=lambda: webbrowser.open_new(datos_fila[11])).grid(row=0, column=1, padx=5, pady=5)
+    tk.Button(boton_frame, text="Abrir Página web", command=lambda: webbrowser.open_new(datos_fila[11])).grid(row=1, column=2, padx=5, pady=5)
     url_variable = datos_fila[8]
     run_input = prepare_actor_input(url_variable)
     tk.Button(boton_frame, text="Aceptar", command=lambda: avanzar_con_guardar()).grid(row=1, column=0, padx=10, pady=5)
