@@ -5,7 +5,6 @@ import webbrowser
 import os
 
 
-
 def guardar_en_archivo(datos):
         # Obtener la ruta del escritorio
             escritorio = "C:/Users/HolaY/OneDrive/Escritorio"
