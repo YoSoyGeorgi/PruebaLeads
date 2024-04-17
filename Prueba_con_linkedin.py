@@ -6,6 +6,7 @@ import os
 import json
 from apify_client import ApifyClient
 
+'''
 def prepare_actor_input(url):
     # Initialize the ApifyClient with your API token
     client = ApifyClient("apify_api_VzpK4MIwUlm2F8CrbaFxWDupkPtuOp09Zy3Y")
@@ -15,7 +16,7 @@ def prepare_actor_input(url):
         "cookie": [
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1720997479,
+                "expirationDate": 1721141819,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "_gcl_au",
@@ -43,7 +44,7 @@ def prepare_actor_input(url):
             },
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1715814302,
+                "expirationDate": 1715958798,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "aam_uuid",
@@ -57,7 +58,7 @@ def prepare_actor_input(url):
             },
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1728773506,
+                "expirationDate": 1728917825,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "AMCV_14215E3D5995C57C0A495C55%40AdobeOrg",
@@ -66,7 +67,7 @@ def prepare_actor_input(url):
                 "secure": False,
                 "session": False,
                 "storeId": "0",
-                "value": "-637568504%7CMCIDTS%7C19829%7CMCMID%7C03532731022193911573327620356049962045%7CMCAAMLH-1713826306%7C7%7CMCAAMB-1713826306%7C6G1ynYcLPuiQxYZrsz_pkqfLG9yMXBpb2zX5dvJdYQJzPXImdj0y%7CMCOPTOUT-1713228706s%7CNONE%7CvVersion%7C5.1.1%7CMCCIDH%7C956283887",
+                "value": "-637568504%7CMCIDTS%7C19831%7CMCMID%7C03532731022193911573327620356049962045%7CMCAAMLH-1713970625%7C7%7CMCAAMB-1713970625%7C6G1ynYcLPuiQxYZrsz_pkqfLG9yMXBpb2zX5dvJdYQJzPXImdj0y%7CMCOPTOUT-1713373025s%7CNONE%7CvVersion%7C5.1.1%7CMCCIDH%7C-514475575",
                 "id": 4
             },
             {
@@ -98,7 +99,7 @@ def prepare_actor_input(url):
             },
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1744758301.644889,
+                "expirationDate": 1744902797.019687,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "bcookie",
@@ -134,7 +135,7 @@ def prepare_actor_input(url):
                 "secure": True,
                 "session": True,
                 "storeId": "0",
-                "value": "taBcrIH61PuCVH7eNCyH0B9zcK90d%252bIeoo1r5v7Zc27Y4HAOU4Dxi99n4Gn0Z6TBtT6S1uMmn0cMe8ON%252bBsqUKOz26s0z2cZZCGEiQyzNH08Xnc3DUB5W1%252bo6IcXQtFb8Dm8ogwCLvZj2hDeDxStpL%252ba4uWn%252b99BrFIi%252fqTU73dMs9ts8144%252fS1GUFJCLHBMp4t29SidMMkOKri4IEjodfr22tZlpZ5CNk4F7w5PNbu28oxESvNV3dSfIPx9THo4hN1s%252bIZEA2VfNPI9Wy%252fb%252bLThp4y6QzlfRwVEjMYRvdgl29jwARt4tpboWxXF35e2RnnEv57JTTxgFm7ZaguRKZcLvmAhBNB9JMVjuESkQ5c%253d",
+                "value": "taBcrIH61PuCVH7eNCyH0B9zcK90d%252bIeoo1r5v7Zc27Y4HAOU4Dxi99n4Gn0Z6TBtT6S1uMmn0cMe8ON%252bBsqUKOz26s0z2cZZCGEiQyzNH08Xnc3DUB5W1%252bo6IcXQtFb8Dm8ogwCLvZj2hDeDxStpNMnIo4iR1rH%252bnM3xQVjiGZOJ8wTQ6%252btt3NaaP9qCAvp%252fSFSAUjkxjxFIxopzDLiiZYNJEQCOgw5qqIewnAb1HKOjRvBRzFVk%252bQtM1e1Ay%252b6KRx4cD8C%252bM42KmGu3czTtETG4%252borxvIwu9gDzHYr5MCmzV4r1Aa%252fG5Tb5MjHZcsfFq19htZhyQ4e%252bIE%252fXlqrCLjBedoXANXEGGoyrFxq6VI%253d",
                 "id": 9
             },
             {
@@ -147,12 +148,12 @@ def prepare_actor_input(url):
                 "secure": True,
                 "session": True,
                 "storeId": "0",
-                "value": "v=2&lang=es-es",
+                "value": "v=2&lang=en-us",
                 "id": 10
             },
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1720998301.644803,
+                "expirationDate": 1721142797.01961,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "li_sugr",
@@ -166,7 +167,7 @@ def prepare_actor_input(url):
             },
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1720997501.377101,
+                "expirationDate": 1721142794.226303,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "liap",
@@ -180,7 +181,7 @@ def prepare_actor_input(url):
             },
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1713240091.790574,
+                "expirationDate": 1713452221.314022,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "lidc",
@@ -189,7 +190,7 @@ def prepare_actor_input(url):
                 "secure": True,
                 "session": False,
                 "storeId": "0",
-                "value": "\"b=TB46:s=T:r=T:a=T:p=T:g=145:u=52:x=1:i=1713222281:t=1713240071:v=2:sig=AQGTH6wpR7ru28qb-27sCKKSCicsypmn\"",
+                "value": "\"b=TB90:s=T:r=T:a=T:p=T:g=3988:u=1:x=1:i=1713366895:t=1713452199:v=2:sig=AQFEbzR3oUsW8gYDoTZH6O0PLKYNPSS3\"",
                 "id": 13
             },
             {
@@ -222,20 +223,7 @@ def prepare_actor_input(url):
             },
             {
                 "domain": ".linkedin.com",
-                "hostOnly": False,
-                "httpOnly": False,
-                "name": "sdsc",
-                "path": "/",
-                "sameSite": "no_restriction",
-                "secure": True,
-                "session": True,
-                "storeId": "0",
-                "value": "22%3A1%2C1713220997359%7EJBSK%2C0QoC1BqIbaZ%2BfodDZIZIzBvsGg6A%3D",
-                "id": 16
-            },
-            {
-                "domain": ".linkedin.com",
-                "expirationDate": 1715814301,
+                "expirationDate": 1715958796,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "UserMatchHistory",
@@ -244,12 +232,12 @@ def prepare_actor_input(url):
                 "secure": True,
                 "session": False,
                 "storeId": "0",
-                "value": "AQLm_FGgJ1n31gAAAY7kAWV4D2Qk0LJm5ikHEmzcxR3w6rvNUIhUW9SQcc0YG361D7CuAiJB9Ri2_jcxbt7_u3cSp1nPFq5qjLSzB2JZgVi64NgzG3Mpw4CSivQc2pv7y-vM1InSd0wVVUNfcnN72beDcZad3cEoR0U0o0Jd7B-1rgqSlD71bm0LaFdvLfTat6E5s0szt7-OaPRkTfds-3sWlMAqn7agoB0_SWBI8rsEkq8oyFhmCM881u2gjItacbK4zWtorLTxytD_OjeO0EyL-xahVo5ghGhmAuv5UkPSyscsXTgZ2r9m3JxBqSgdvkT-G6Q",
-                "id": 17
+                "value": "AQI95Cq9lhwy2wAAAY7snjTRCKB7WLbc6UC39ikiGQDjkq1lDbawGrKityMoiEgOKHeyILkzIo9sBmrS_wLWAmgOHr9QnmzPe-sEFC_xyOMxW9H-v7Q95VBqXzWmY1gV8ZQoXzu1Egj0g4--KVKjAOqIudtzgAOQLN4N6ync-Te3U18nrldXTN_pAHXWPrvbkQFri_wPZGlhdinj77cVqNc5eKKhXagzOlQGUxjQl4tlhYBcolro1gDKmohNIoD2tQ42wIpQ2M-VfDGFm7g7gSFlSQFe_3DuDPfGEsMMElbx4qfmiHqXUiKF_3lVUyn7TPibg6I",
+                "id": 16
             },
             {
                 "domain": ".linkedin.com",
-                "expirationDate": 1747781482.319156,
+                "expirationDate": 1747926769.63961,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "visit",
@@ -259,11 +247,11 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "v=1&M",
-                "id": 18
+                "id": 17
             },
             {
                 "domain": ".www.linkedin.com",
-                "expirationDate": 1744757501.546035,
+                "expirationDate": 1744902795.22644,
                 "hostOnly": False,
                 "httpOnly": True,
                 "name": "bscookie",
@@ -273,11 +261,11 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "\"v=1&202402261605469accc0f0-2f1a-4d0f-89fc-289dd1a365f9AQFixe-3uD7OSuKcLWx-EJD6gER9BO4q\"",
-                "id": 19
+                "id": 18
             },
             {
                 "domain": ".www.linkedin.com",
-                "expirationDate": 1720997501.37715,
+                "expirationDate": 1721142794.226368,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "JSESSIONID",
@@ -286,12 +274,12 @@ def prepare_actor_input(url):
                 "secure": True,
                 "session": False,
                 "storeId": "0",
-                "value": "\"ajax:4368900647953205497\"",
-                "id": 20
+                "value": "\"ajax:3821441490515782225\"",
+                "id": 19
             },
             {
                 "domain": ".www.linkedin.com",
-                "expirationDate": 1744757501.377039,
+                "expirationDate": 1744902794.226344,
                 "hostOnly": False,
                 "httpOnly": True,
                 "name": "li_at",
@@ -300,12 +288,12 @@ def prepare_actor_input(url):
                 "secure": True,
                 "session": False,
                 "storeId": "0",
-                "value": "AQEDAUo4yuoFRkiEAAABjuP1M2EAAAGPCAG3YU4Aa2BTpJCfRzFoM1ghEuP_GWJbDsqrgOzHCI8jWmikrkrBvjs-S8XFSMeVEuLsIj0MOwLl3YtTB6N4cusFhAIIYPWzx5oKdHZHtM4nf-UdwzxNy5ba",
-                "id": 21
+                "value": "AQEDAU2fU7oEpfvWAAABjuyeLWUAAAGPEKqxZU4AQubZKFxUbVhGijYX_sxsuM0xKPYbpA0zyufHjgYaC6ihSTLftXeVTD6wj5FAr7A5iFIhQ-JDsTaBi8ALZCUmUgogS3MFPlHKiHbKpHR5yaHXeBdf",
+                "id": 20
             },
             {
                 "domain": ".www.linkedin.com",
-                "expirationDate": 1744757501.376633,
+                "expirationDate": 1744902794.226148,
                 "hostOnly": False,
                 "httpOnly": True,
                 "name": "li_rm",
@@ -315,11 +303,11 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "AQENUYx-QFKggQAAAY7j6xmJMoqJf8sMQ7wOmaPGqAbAhhNHdG_0dzPI6E9JmbABh5TaTG79DEX-WDe4FdbdyoT1MZVKwXoFYnrJyDcf6GzYfOKDhUiGIKskER3abJzjt9KQYP4FKVaDobbw_XayQ77PXrEYzh6zzaJaYQHBArw3pFsInseiaUxXUCKQdJ6zEdjSsaO4kcKlRNmI8waxYxiv5szEDB8N_bOIxRY6e2ufxVg6GmtfKyCH6U14iEG_dxU1reQ6L6Ja5Ubs9tagYsiZUQvTZbgLnWV7t4IlCyiTT4YMicbmxqDA31GKvrozP8CBslT2ACMP5PKBhSY",
-                "id": 22
+                "id": 21
             },
             {
                 "domain": ".www.linkedin.com",
-                "expirationDate": 1728774298,
+                "expirationDate": 1728918795,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "li_theme",
@@ -329,11 +317,11 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "light",
-                "id": 23
+                "id": 22
             },
             {
                 "domain": ".www.linkedin.com",
-                "expirationDate": 1728774298,
+                "expirationDate": 1728918795,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "li_theme_set",
@@ -343,11 +331,11 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "app",
-                "id": 24
+                "id": 23
             },
             {
                 "domain": ".www.linkedin.com",
-                "expirationDate": 1714431898,
+                "expirationDate": 1714576395,
                 "hostOnly": False,
                 "httpOnly": False,
                 "name": "timezone",
@@ -357,11 +345,11 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "America/Mexico_City",
-                "id": 25
+                "id": 24
             },
             {
                 "domain": "www.linkedin.com",
-                "expirationDate": 1713826294.585376,
+                "expirationDate": 1713971586.202144,
                 "hostOnly": True,
                 "httpOnly": False,
                 "name": "fcookie",
@@ -370,8 +358,8 @@ def prepare_actor_input(url):
                 "secure": True,
                 "session": False,
                 "storeId": "0",
-                "value": "AQGiNyalfvTTBgAAAY7j9RkxXYecf55F3qeKIMyqLqY7DxIqN_nadf0hgcJ__7f2gIu--vNJNH2V5ajSbwlvR2Qg2ckeQCI9XU-lRYTQbF_dTY75K2C4WXlYjvUUjlqRiWzM1HiQR06M3aNli42tJ6fEy4MPTF4c5xieD0SI9EqEX_qVPBn2BMymzKjf7imrYdUyfxe4totKxobUzAaHS8CZLV8cVzscBrsBR-ivED1pZDLVfltT9nsqIDm6HT_lcETKAxq+BgQx0nFKmOedrsQ/XSRGFYcXuWXeYcceTn4RC6Op22UM1kTU+rIF3zon5eIAdaMbwn3JE9Vph/kxlg==",
-                "id": 26
+                "value": "AQHg_dENKZAF_AAAAY7sng48UChbOSCqAERtH5K5ZGJGhRL1sLgXg7xSwfGCjcnYlbdttAxVS9TYML-GEvWF-4kUwsvNsf6k0Qr6970_Z3rsP1HmDOfmnint3SsVASRL97jSkC2V_w8Q3BCX2EGcrUr5aFmq8OIRVD6Hd4X577RPrvKkUt5etHz0r3hAzKBy6tkC6OezG19nM6WuJQwIu0DTKnWHH5VWX1ckm4IfkEYg32pNsr4g7QWjb8swCh5TY7wOzLfJwRRktcl+GVjpLlRaJizsofvQlpdEDlW8VJ79ue5E3iHTS2fjbEa4/SYHZhaOkq19pHe341ZqmJ+gNQ==",
+                "id": 25
             },
             {
                 "domain": "www.linkedin.com",
@@ -385,11 +373,11 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "AQE6H5KDbX_IUgAAAY7j6y3MF8jSwgK4QNnzi8xb39FAU1-T7xPmQZgRtxHszPJ5VJA7haoeJYuGxA",
-                "id": 27
+                "id": 26
             },
             {
                 "domain": "www.linkedin.com",
-                "expirationDate": 1725201391,
+                "expirationDate": 1728918775,
                 "hostOnly": True,
                 "httpOnly": False,
                 "name": "g_state",
@@ -398,12 +386,12 @@ def prepare_actor_input(url):
                 "secure": False,
                 "session": False,
                 "storeId": "0",
-                "value": "{\"i_t\":1709735791232,\"i_l\":0}",
-                "id": 28
+                "value": "{\"i_l\":0}",
+                "id": 27
             },
             {
                 "domain": "www.linkedin.com",
-                "expirationDate": 1713225082.31888,
+                "expirationDate": 1713370369.639387,
                 "hostOnly": True,
                 "httpOnly": False,
                 "name": "li_g_recent_logout",
@@ -413,9 +401,9 @@ def prepare_actor_input(url):
                 "session": False,
                 "storeId": "0",
                 "value": "v=1&True",
-                "id": 29
+                "id": 28
             }
-        ],
+            ],
         "maxDelay": 60,
         "minDelay": 15,
         "scrapeCompany": False,
@@ -447,6 +435,9 @@ def prepare_actor_input(url):
         print("Giro de la empresa:", industry_name)
         print("Nombre de la empresa:", company_name)
     return run_input
+
+'''
+
 
 def guardar_en_archivo(datos):
         # Obtener la ruta del escritorio
@@ -531,8 +522,7 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
 
 
     def avanzar_sin_guardar():
-        # Cerrar la ventana actual
-        ventana_datos.destroy()
+        
 
         # Verificar si estamos en la última fila permitida para evitar un error de índice
         if indice_fila + 1 < len(datos) and indice_fila + 1 <= fila_fin:
@@ -540,6 +530,9 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
             mostrar_fila(indice_fila + 1, datos, fila_inicio, fila_fin)
         else:
             messagebox.showinfo("Fin del archivo", "Has alcanzado el final del rango especificado.")
+
+            # Cerrar la ventana actual
+        ventana_datos.destroy()
 
     # Botones
     boton_frame = tk.Frame(ventana_datos)

@@ -4,6 +4,8 @@ import csv
 import webbrowser
 import os
 
+
+
 def guardar_en_archivo(datos):
         # Obtener la ruta del escritorio
             escritorio = "C:/Users/HolaY/OneDrive/Escritorio"
@@ -18,19 +20,11 @@ def guardar_en_archivo(datos):
 def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     global ventana_datos
 
-    
-
-    ventana_datos = tk.Toplevel()  # Uso de Toplevel para evitar problemas con la destrucción de ventanas
+    ventana_datos = tk.Toplevel()
     ventana_datos.title("Datos de la Fila")
 
     nombres_columnas = datos[0]
     datos_fila = datos[indice_fila][1:27]  # Asegurarse de incluir hasta la columna Z
-
-    # Verificar si la fila debe ser omitida
-    if float(datos_fila[14]) < 11 and datos_fila[3] not in ["TRESITE", "MYCASHLESS"]:
-        messagebox.showinfo("Fila omitida", "La fila ha sido omitida debido a que el valor en la columna P es menor a 11 y la columna E no es TRESITE ni MYCASHLESS.")
-        avanzar_sin_guardar()
-        return
 
     # Paneles para organizar la UI
     panel_izquierdo = tk.Frame(ventana_datos)
@@ -39,25 +33,45 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     panel_derecho = tk.Frame(ventana_datos)
     panel_derecho.grid(row=0, column=1, sticky="nsew")
 
-    # Lista para almacenar las referencias a los TextBoxes editables en el panel izquierdo
-    textbox_entries_left = []
-    for i, nombre_columna in enumerate(nombres_columnas[1:15]):
-        tk.Label(panel_izquierdo, text=f"{nombre_columna}:", padx=10, pady=5, font=("Arial", 10, "bold")).grid(row=i, column=0, padx=5, pady=5)
-        entry = tk.Entry(panel_izquierdo, width=50)
-        entry.insert(0, datos_fila[i])
-        entry.grid(row=i, column=1, padx=5, pady=5)
-        textbox_entries_left.append(entry)
+    # Configuración de los índices de columnas para cada panel
+    indices_izquierdos = list(range(0, 12)) + [16]  # Incluir Q después de K y M
+    indices_derechos = [13, 14, 15, 17, 21, 22, 23, 24]  # Incluir O antes de P
 
-    # Lista para almacenar las referencias a los TextBoxes editables en el panel derecho
-    textbox_entries_right = []
-    indices_derechos = [14, 15, 16, 21, 22, 23, 24]  # Indices de las columnas P, Q, R, W, X, Y, Z
+    # Diccionario para manejar la creación de widgets dinámicamente
+    special_widgets = {
+        6: "entry",  # Columna H, índice 7 en los datos
+        10: "entry", # Columna L, índice 11 en los datos
+        3: "dropdown" # Columna E, índice 4 en los datos
+    }
+
+    # Función para crear los widgets adecuados
+    def create_widget(parent, column, value, row, column_idx):
+        if column_idx in special_widgets:
+            if special_widgets[column_idx] == "entry":
+                entry = tk.Entry(parent, width=50)
+                entry.insert(0, value)
+                entry.grid(row=row, column=1, padx=5, pady=5)
+                return entry
+            elif special_widgets[column_idx] == "dropdown":
+                var = tk.StringVar(parent)
+                var.set(value)  # set default value
+                dropdown = tk.OptionMenu(parent, var, "TRESITE", "MYCASHLESS", "OTHER")
+                dropdown.config(width=48)
+                dropdown.grid(row=row, column=1, padx=5, pady=5)
+                return var
+        else:
+            label = tk.Label(parent, text=value, width=50, anchor="w")
+            label.grid(row=row, column=1, padx=5, pady=5)
+
+    # Crea widgets para el panel izquierdo
+    for i, idx in enumerate(indices_izquierdos):
+        tk.Label(panel_izquierdo, text=f"{nombres_columnas[idx + 1]}:", padx=10, pady=5, font=("Arial", 10, "bold")).grid(row=i, column=0, padx=5, pady=5)
+        create_widget(panel_izquierdo, idx, datos_fila[idx], i, idx)
+
+    # Crea widgets para el panel derecho
     for i, idx in enumerate(indices_derechos):
-        nombre_columna = nombres_columnas[idx +1]
-        tk.Label(panel_derecho, text=f"{nombre_columna}:", padx=10, pady=5, font=("Arial", 10, "bold")).grid(row=i, column=0, padx=5, pady=5)
-        entry = tk.Entry(panel_derecho, width=50)
-        entry.insert(0, datos_fila[idx])
-        entry.grid(row=i, column=1, padx=5, pady=5)
-        textbox_entries_right.append(entry)
+        tk.Label(panel_derecho, text=f"{nombres_columnas[idx + 1]}:", padx=10, pady=5, font=("Arial", 10, "bold")).grid(row=i, column=0, padx=5, pady=5)
+        create_widget(panel_derecho, idx, datos_fila[idx], i, idx)
 
     def avanzar_con_guardar():
         global datos
@@ -92,16 +106,18 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
         # Cerrar la ventana actual
         ventana_datos.destroy()
 
-        # Pasar a la siguiente fila sin guardar los cambios
-        mostrar_fila(indice_fila + 1, datos, fila_inicio, fila_fin)
+        # Verificar si estamos en la última fila permitida para evitar un error de índice
+        if indice_fila + 1 < len(datos) and indice_fila + 1 <= fila_fin:
+            # Pasar a la siguiente fila
+            mostrar_fila(indice_fila + 1, datos, fila_inicio, fila_fin)
+        else:
+            messagebox.showinfo("Fin del archivo", "Has alcanzado el final del rango especificado.")
 
     # Botones
     boton_frame = tk.Frame(ventana_datos)
     boton_frame.grid(row=1, column=0, columnspan=2, pady=10)
 
-    tk.Button(boton_frame, text="Abrir Perfil Personal", command=lambda: webbrowser.open_new(datos_fila[8])).grid(row=0, column=0, padx=5, pady=5)
-    tk.Button(boton_frame, text="Abrir Página web", command=lambda: webbrowser.open_new(datos_fila[11])).grid(row=0, column=1, padx=5, pady=5)
-    tk.Button(boton_frame, text="Abrir Perfil de la empresa", command=lambda: webbrowser.open_new(datos_fila[13])).grid(row=0, column=2, padx=5, pady=5)
+    tk.Button(boton_frame, text="Abrir Página web", command=lambda: webbrowser.open_new(datos_fila[11])).grid(row=1, column=2, padx=5, pady=5)
     tk.Button(boton_frame, text="Aceptar", command=lambda: avanzar_con_guardar()).grid(row=1, column=0, padx=10, pady=5)
     tk.Button(boton_frame, text="Rechazar", command=lambda: avanzar_sin_guardar()).grid(row=1, column=1, padx=10, pady=5)
 
@@ -118,12 +134,11 @@ def abrir_csv():
             lector_csv = csv.reader(csvfile)
             datos = list(lector_csv)
 
-        fila_inicio = int(fila_inicio_entry.get())
-        fila_fin = int(fila_fin_entry.get())
+        fila_inicio = 2
+        fila_fin = len(datos)
 
         # Mostrar los datos de la fila especificada
-        mostrar_fila(fila_inicio - 3, datos, fila_inicio, fila_fin)  # Restamos 1 para que coincida con el índice de Python (que comienza desde 0)
-
+        mostrar_fila(fila_inicio - 1, datos, fila_inicio, fila_fin)  # Restamos 1 para que coincida con el índice de Python (que comienza desde 0)
 
 ventana_principal = tk.Tk()
 ventana_principal.title("Cargar CSV")
@@ -137,20 +152,10 @@ y = int((alto_pantalla - 480) / 2)
 ventana_principal.geometry(f"+{x}+{y}")
 ventana_principal.geometry("640x480")
 
-# Añadir labels y textboxes para el rango de filas
-fila_inicio_label = tk.Label(ventana_principal, text="Fila de inicio:")
-fila_inicio_label.pack()
+# Añadir labels y textboxes para el rango de filas (eliminados por brevedad)
 
-fila_inicio_entry = tk.Entry(ventana_principal)
-fila_inicio_entry.pack()
-
-fila_fin_label = tk.Label(ventana_principal, text="Fila final:")
-fila_fin_label.pack()
-
-fila_fin_entry = tk.Entry(ventana_principal)
-fila_fin_entry.pack()
-
+# Botón para abrir el archivo CSV
 boton_abrir_csv = tk.Button(ventana_principal, text="Abrir CSV", command=abrir_csv)
-boton_abrir_csv.pack(pady=20)
+boton_abrir_csv.pack(ipadx=20, ipady=20, expand=True)  # Ajusta ipadx e ipady para modificar el tamaño
 
 ventana_principal.mainloop()
