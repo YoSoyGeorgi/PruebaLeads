@@ -4,6 +4,9 @@ import csv
 import webbrowser
 import os
 
+with open("aceptados.txt", "r", encoding="utf-8") as file:
+    nombres_destacados = [nombre.strip('"') for nombre in file.read().split(", ")]
+
 
 def guardar_en_archivo(datos):
         # Obtener la ruta del escritorio
@@ -32,21 +35,53 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     panel_derecho = tk.Frame(ventana_datos)
     panel_derecho.grid(row=0, column=1, sticky="nsew")
 
+    # Paneles para organizar los checkboxes en dos columnas
+    panel_checkboxes = tk.Frame(panel_derecho)
+    panel_checkboxes.grid(row=8, column=1, sticky="nsew", padx=10, pady=10)
+    
+    nombres_checkboxes = [
+        "MSM", "TTEN", "SICOM", "BAW", "POLIMATA", "TRESITE", "CMOV",
+        "INTEGRA", "BRIYAM", "ITNNOVATION", "ENRED", "MYCASHLESS",
+        "VIRMAR", "COVALU", "INTERASTAR", "STRATEGO", "LANZ"
+    ]
+    
+    # Determina el número de nombres para calcular la división en dos listas
+    mitad_lista = len(nombres_checkboxes) // 2
+
+    # Crear checkboxes en la primera columna
+    for i, nombre in enumerate(nombres_checkboxes[:mitad_lista]):
+        var = tk.BooleanVar()
+        check = tk.Checkbutton(panel_checkboxes, text=nombre, variable=var)
+        check.grid(row=i, column=0, sticky='w')
+
+    # Crear checkboxes en la segunda columna
+    for i, nombre in enumerate(nombres_checkboxes[mitad_lista:]):
+        var = tk.BooleanVar()
+        check = tk.Checkbutton(panel_checkboxes, text=nombre, variable=var)
+        check.grid(row=i, column=1, sticky='w')
+
     # Configuración de los índices de columnas para cada panel
     indices_izquierdos = list(range(0, 12)) + [16]  # Incluir Q después de K y M
     indices_derechos = [13, 14, 15, 17, 21, 22, 23, 24]  # Incluir O antes de P
 
     # Diccionario para manejar la creación de widgets dinámicamente
     special_widgets = {
-        6: "entry",  # Columna H, índice 7 en los datos
-        10: "entry", # Columna L, índice 11 en los datos
+        6: "entry1",  # Columna H, índice 7 en los datos
+        10: "entry2", # Columna L, índice 11 en los datos
         3: "dropdown" # Columna E, índice 4 en los datos
     }
 
     # Función para crear los widgets adecuados
     def create_widget(parent, column, value, row, column_idx):
         if column_idx in special_widgets:
-            if special_widgets[column_idx] == "entry":
+            if special_widgets[column_idx] == "entry1":
+                entry = tk.Entry(parent, width=50)
+                entry.insert(0, value)
+                entry.grid(row=row, column=1, padx=5, pady=5)
+                if value.strip('"') in nombres_destacados:
+                    entry.config(bg='Green')  # Cambiar el fondo a rojo si el nombre está en la lista
+                return entry
+            if special_widgets[column_idx] == "entry2":
                 entry = tk.Entry(parent, width=50)
                 entry.insert(0, value)
                 entry.grid(row=row, column=1, padx=5, pady=5)
@@ -54,7 +89,24 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
             elif special_widgets[column_idx] == "dropdown":
                 var = tk.StringVar(parent)
                 var.set(value)  # set default value
-                dropdown = tk.OptionMenu(parent, var, "TRESITE", "MYCASHLESS", "OTHER")
+                dropdown = tk.OptionMenu(parent, var, 
+                                        "MSM",
+                                        "TTEN",
+                                        "SICOM",
+                                        "BAW",
+                                        "POLIMATA",
+                                        "TRESITE",
+                                        "CMOV",
+                                        "INTEGRA",
+                                        "BRIYAM",
+                                        "ITNNOVATION",
+                                        "ENRED",
+                                        "MYCASHLESS",
+                                        "VIRMAR",
+                                        "COVALU",
+                                        "INTERASTAR",
+                                        "STRATEGO",
+                                        "LANZ")
                 dropdown.config(width=48)
                 dropdown.grid(row=row, column=1, padx=5, pady=5)
                 return var
