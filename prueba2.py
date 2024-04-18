@@ -79,7 +79,7 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
                 entry.insert(0, value)
                 entry.grid(row=row, column=1, padx=5, pady=5)
                 if value.strip('"') in nombres_destacados:
-                    entry.config(bg='Green')  # Cambiar el fondo a rojo si el nombre está en la lista
+                    entry.config(bg="#65E320")  # Cambiar el fondo a rojo si el nombre está en la lista
                 return entry
             if special_widgets[column_idx] == "entry2":
                 entry = tk.Entry(parent, width=50)
