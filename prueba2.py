@@ -25,6 +25,9 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     ventana_datos = tk.Toplevel()
     ventana_datos.title("Datos de la Fila")
 
+    textbox_entries_left = []
+    textbox_entries_right = []
+
     nombres_columnas = datos[0]
     datos_fila = datos[indice_fila][1:27]  # Asegurarse de incluir hasta la columna Z
 
@@ -208,7 +211,7 @@ ventana_principal.geometry("640x480")
 # Añadir labels y textboxes para el rango de filas (eliminados por brevedad)
 
 # Botón para abrir el archivo CSV
-boton_abrir_csv = tk.Button(ventana_principal, text="Abrir CSV", command=abrir_csv)
+boton_abrir_csv = tk.Button(ventana_principal, text="Abrir CSV", font=("Roboto", 12, "bold"), border= "5px",command=abrir_csv)
 boton_abrir_csv.pack(ipadx=20, ipady=20, expand=True)  # Ajusta ipadx e ipady para modificar el tamaño
 
 ventana_principal.mainloop()
