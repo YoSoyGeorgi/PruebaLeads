@@ -51,13 +51,13 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     # Crear checkboxes en la primera columna
     for i, nombre in enumerate(nombres_checkboxes[:mitad_lista]):
         var = tk.BooleanVar()
-        check = tk.Checkbutton(panel_checkboxes, text=nombre, variable=var)
+        check = tk.Checkbutton(panel_checkboxes, text=nombre, variable=var, font=("Roboto", 9))
         check.grid(row=i, column=0, sticky='w')
 
     # Crear checkboxes en la segunda columna
     for i, nombre in enumerate(nombres_checkboxes[mitad_lista:]):
         var = tk.BooleanVar()
-        check = tk.Checkbutton(panel_checkboxes, text=nombre, variable=var)
+        check = tk.Checkbutton(panel_checkboxes, text=nombre, variable=var, font=("Roboto", 9))
         check.grid(row=i, column=1, sticky='w')
 
     # Configuración de los índices de columnas para cada panel
@@ -79,7 +79,7 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
                 entry.insert(0, value)
                 entry.grid(row=row, column=1, padx=5, pady=5)
                 if value.strip('"') in nombres_destacados:
-                    entry.config(bg="#65E320")  # Cambiar el fondo a rojo si el nombre está en la lista
+                    entry.config(bg="#65E320")  # Cambiar el fondo a verde si el nombre está en la lista
                 return entry
             if special_widgets[column_idx] == "entry2":
                 entry = tk.Entry(parent, width=50)
