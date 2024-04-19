@@ -111,17 +111,17 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
                 dropdown.grid(row=row, column=1, padx=5, pady=5)
                 return var
         else:
-            label = tk.Label(parent, text=value, width=50, anchor="w")
+            label = tk.Label(parent, text=value, width=50, anchor="center", justify="center", font=("Roboto", 10))
             label.grid(row=row, column=1, padx=5, pady=5)
 
     # Crea widgets para el panel izquierdo
     for i, idx in enumerate(indices_izquierdos):
-        tk.Label(panel_izquierdo, text=f"{nombres_columnas[idx + 1]}:", padx=10, pady=5, font=("Arial", 10, "bold")).grid(row=i, column=0, padx=5, pady=5)
+        tk.Label(panel_izquierdo, text=f"{nombres_columnas[idx + 1]}:", padx=10, pady=5, font=("Roboto", 12, "bold")).grid(row=i, column=0, padx=5, pady=5)
         create_widget(panel_izquierdo, idx, datos_fila[idx], i, idx)
 
     # Crea widgets para el panel derecho
     for i, idx in enumerate(indices_derechos):
-        tk.Label(panel_derecho, text=f"{nombres_columnas[idx + 1]}:", padx=10, pady=5, font=("Arial", 10, "bold")).grid(row=i, column=0, padx=5, pady=5)
+        tk.Label(panel_derecho, text=f"{nombres_columnas[idx + 1]}:", padx=10, pady=5, font=("Roboto", 12, "bold")).grid(row=i, column=0, padx=5, pady=5)
         create_widget(panel_derecho, idx, datos_fila[idx], i, idx)
 
     def avanzar_con_guardar():
@@ -144,11 +144,12 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
         ventana_datos.destroy()
 
         # Verificar si estamos en la última fila permitida para evitar un error de índice
-        if indice_fila + 1 < len(datos) and indice_fila + 1 <= fila_fin:
+        if indice_fila + 1 > len(datos):
+            messagebox.showinfo("Fin del archivo", "Has alcanzado el final del rango especificado.")
+            ventana_datos.destroy()
+        else:
             # Pasar a la siguiente fila
             mostrar_fila(indice_fila + 1, datos, fila_inicio, fila_fin)
-        else:
-            messagebox.showinfo("Fin del archivo", "Has alcanzado el final del rango especificado.")
 
         
 
@@ -158,11 +159,12 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
         ventana_datos.destroy()
 
         # Verificar si estamos en la última fila permitida para evitar un error de índice
-        if indice_fila + 1 < len(datos) and indice_fila + 1 <= fila_fin:
+        if indice_fila + 1 > len(datos):
+            messagebox.showinfo("Fin del archivo", "Has alcanzado el final del rango especificado.")
+            ventana_datos.destroy()
+        else:
             # Pasar a la siguiente fila
             mostrar_fila(indice_fila + 1, datos, fila_inicio, fila_fin)
-        else:
-            messagebox.showinfo("Fin del archivo", "Has alcanzado el final del rango especificado.")
 
     # Botones
     boton_frame = tk.Frame(ventana_datos)
