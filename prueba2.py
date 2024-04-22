@@ -8,16 +8,12 @@ with open("aceptados.txt", "r", encoding="utf-8") as file:
     nombres_destacados = [nombre.strip('"') for nombre in file.read().split(", ")]
 
 
-def guardar_en_archivo(datos):
-        # Obtener la ruta del escritorio
-            escritorio = "C:/Users/HolaY/OneDrive/Escritorio"
-
-        # Crear o abrir el archivo en modo de escritura
-            with open(os.path.join(escritorio, 'datos_guardados.txt'), 'w', encoding='utf-8') as archivo:
-                # Escribir los datos en el archivo
-                for fila in datos:
-                    fila_como_texto = ','.join(fila)  # Convertir la lista de datos de la fila en una cadena separada por comas
-                    archivo.write(fila_como_texto + '\n')  # Escribir la fila en el archivo, seguida de un salto de línea
+def guardar_en_archivo(filas):
+    escritorio = "C:/Users/HolaY/OneDrive/Escritorio"
+    with open(os.path.join(escritorio, 'datos_guardados.txt'), 'a', encoding='utf-8') as archivo:
+        for fila in filas:
+            fila_como_texto = ','.join(fila)  # Asegúrate de que fila es una lista de strings
+            archivo.write(fila_como_texto + '\n')  # Escribe la fila en el archivo
 
 def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     global ventana_datos
@@ -129,19 +125,15 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
 
     def avanzar_con_guardar():
         global datos
-    # Actualizar los datos en la lista de datos con los valores editados en los TextBoxes
-    # Asegurarse de incluir las entradas de ambos paneles
-        for i, entry in enumerate(textbox_entries_left):
-            datos[indice_fila][i + 1] = entry.get()  # Actualizar el valor en la lista de datos para el panel izquierdo
-        
-        # Indices para los datos del panel derecho, ajustados para las columnas en el CSV
-        indices_derechos = [14, 15, 16, 21, 22, 23, 24]  # Indices de las columnas P, Q, R, W, X, Y, Z
-        for i, entry in enumerate(textbox_entries_right):
-            datos[indice_fila][indices_derechos[i] + 1] = entry.get()  # Sumamos 1 porque los índices del CSV comienzan en 0
+        fila_actualizada = datos[indice_fila]
+
+        for i, entry in enumerate(textbox_entries_left + textbox_entries_right):
+            fila_actualizada[i + 1] = entry.get()  # +1 para omitir el ID en el índice 0
+
+    # Ahora fila_actualizada contiene los datos actualizados de la fila
+        guardar_en_archivo([fila_actualizada])  # Pasa la fila actualizada como una lista de una fila
 
         messagebox.showinfo("Datos guardados", "Los datos editados han sido guardados correctamente.")
-
-        guardar_en_archivo(datos)
 
         # Cerrar la ventana actual
         ventana_datos.destroy()
