@@ -2,18 +2,74 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import csv
 import webbrowser
-import os
+import json
+from google.auth.credentials import Credentials
+from google.oauth2 import service_account
+import gspread
+
+
 
 with open("aceptados.txt", "r", encoding="utf-8") as file:
     nombres_destacados = [nombre.strip('"') for nombre in file.read().split(", ")]
 
 
-def guardar_en_archivo(filas):
+'''def guardar_en_archivo(filas):
     escritorio = "C:/Users/HolaY/OneDrive/Escritorio"
     with open(os.path.join(escritorio, 'datos_guardados.txt'), 'a', encoding='utf-8') as archivo:
         for fila in filas:
             fila_como_texto = ','.join(fila)  # Asegúrate de que fila es una lista de strings
             archivo.write(fila_como_texto + '\n')  # Escribe la fila en el archivo
+'''
+
+def guardar_en_archivo(filas):
+    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    
+    try:
+        # Crear credenciales desde el archivo JSON
+        credentials = service_account.Credentials.from_service_account_file(r'JsonFileFromGoogle.json', scopes=scope)
+        
+        # Autorizar la conexión
+        gc = gspread.authorize(credentials)
+        
+        # Clave de la hoja de cálculo
+        spreadsheet_key1 = '1kSBKZ873WvsnFzT90-WY1fTEQIe3vp2npEiEw_h5iC8'
+        
+        # Abrir la hoja de cálculo
+        worksheet = gc.open_by_key(spreadsheet_key1).worksheet('TEST')
+        
+        # Obtener la cantidad de filas en la hoja de cálculo
+        last_row = worksheet.row_count
+        
+        '''
+        # Rango para borrar antes de agregar nuevas filas
+        range_to_clear = f'A6:V{last_row}'
+        
+        # Borrar el rango especificado
+        worksheet.batch_clear([range_to_clear])
+        '''
+        
+        # Convertir los datos en la lista a cadenas y llenar los valores NaN con una cadena vacía
+        rows_to_add = [[str(value) if value != 'nan' else '' for value in row] for row in filas]
+        
+        # Definir el rango de celdas donde se escribirán los datos
+        start_row = len(worksheet.col_values(1)) + 1
+        #start_row = 1
+        end_row = start_row + len(rows_to_add) - 1
+        start_col = 'A'
+        end_col = 'AZ'
+        range_to_write = f'{start_col}{start_row}:{end_col}{start_row}'
+        
+        # Actualizar la hoja de cálculo con los nuevos datos
+        worksheet.update(range_to_write, rows_to_add)
+        print("Exito")
+        
+        print('Check google sheets')
+    except Exception as e:
+        print(f'Error al cargar en Google Sheets: {str(e)}')
+
+    
+
+
 
 def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     global ventana_datos
@@ -144,14 +200,17 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
         # Obtener los valores de los entry y dropdown
         entry_values, dropdown_values = get_widget_values()
 
+        
         # Insertar los valores en la fila actualizada
-        fila_actualizada[6] = entry_values[0]  # Insertar el valor del entry1 en la posición 6
-        fila_actualizada[10] = entry_values[1]  # Insertar el valor del entry2 en la posición 10
-        fila_actualizada[3] = dropdown_values[0]  # Insertar el valor del dropdown en la posición 3
-        del fila_actualizada[7], fila_actualizada[10], fila_actualizada[4]
+        fila_actualizada[7] = entry_values[0]  # Insertar el valor del entry1 en la posición 6
+        fila_actualizada[11] = entry_values[1]  # Insertar el valor del entry2 en la posición 10
+        fila_actualizada[4] = dropdown_values[0]  # Insertar el valor del dropdown en la posición 3
+
 
         guardar_en_archivo([fila_actualizada])  # Pasa la fila actualizada como una lista de una fila
-
+        
+        print([fila_actualizada])
+        
         messagebox.showinfo("Datos guardados", "Los datos editados han sido guardados correctamente.")
 
         # Cerrar la ventana actual
