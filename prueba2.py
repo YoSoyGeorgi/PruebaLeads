@@ -18,6 +18,9 @@ def guardar_en_archivo(filas):
 def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
     global ventana_datos
 
+    entry_widgets = []
+    dropdown_widgets = []
+
     ventana_datos = tk.Toplevel()
     ventana_datos.title("Datos de la Fila")
 
@@ -79,11 +82,13 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
                 entry.grid(row=row, column=1, padx=5, pady=5)
                 if value.strip('"') in nombres_destacados:
                     entry.config(bg="#65E320")  # Cambiar el fondo a verde si el nombre está en la lista
+                entry_widgets.append(entry)
                 return entry
             if special_widgets[column_idx] == "entry2":
                 entry = tk.Entry(parent, width=50)
                 entry.insert(0, value)
                 entry.grid(row=row, column=1, padx=5, pady=5)
+                entry_widgets.append(entry)
                 return entry
             elif special_widgets[column_idx] == "dropdown":
                 var = tk.StringVar(parent)
@@ -108,6 +113,7 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
                                         "LANZ")
                 dropdown.config(width=48)
                 dropdown.grid(row=row, column=1, padx=5, pady=5)
+                dropdown_widgets.append(var)
                 return var
         else:
             label = tk.Label(parent, text=value, width=50, anchor="center", justify="center", font=("Roboto", 10))
@@ -123,6 +129,11 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
         tk.Label(panel_derecho, text=f"{nombres_columnas[idx + 1]}:", padx=10, pady=5, font=("Roboto", 12, "bold")).grid(row=i, column=0, padx=5, pady=5)
         create_widget(panel_derecho, idx, datos_fila[idx], i, idx)
 
+    def get_widget_values():
+        entry_values = [entry.get() for entry in entry_widgets]
+        dropdown_values = [dropdown.get() for dropdown in dropdown_widgets]
+        return entry_values, dropdown_values
+
     def avanzar_con_guardar():
         global datos
         fila_actualizada = datos[indice_fila]
@@ -130,7 +141,15 @@ def mostrar_fila(indice_fila, datos, fila_inicio, fila_fin):
         for i, entry in enumerate(textbox_entries_left + textbox_entries_right):
             fila_actualizada[i + 1] = entry.get()  # +1 para omitir el ID en el índice 0
 
-    # Ahora fila_actualizada contiene los datos actualizados de la fila
+        # Obtener los valores de los entry y dropdown
+        entry_values, dropdown_values = get_widget_values()
+
+        # Insertar los valores en la fila actualizada
+        fila_actualizada[6] = entry_values[0]  # Insertar el valor del entry1 en la posición 6
+        fila_actualizada[10] = entry_values[1]  # Insertar el valor del entry2 en la posición 10
+        fila_actualizada[3] = dropdown_values[0]  # Insertar el valor del dropdown en la posición 3
+        del fila_actualizada[7], fila_actualizada[10], fila_actualizada[4]
+
         guardar_en_archivo([fila_actualizada])  # Pasa la fila actualizada como una lista de una fila
 
         messagebox.showinfo("Datos guardados", "Los datos editados han sido guardados correctamente.")
